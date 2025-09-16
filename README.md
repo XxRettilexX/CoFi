@@ -48,7 +48,7 @@ Il progetto Ã¨ pensato per essere **elegante, sicuro e collaborativo**, con unâ€
 
 
 4. Configura il file .env (database, email, chiavi segrete):
-
+    ```env
     DB_CONNECTION=mysql
     DB_HOST=127.0.0.1
     DB_PORT=3306
