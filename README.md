@@ -56,7 +56,6 @@ Il progetto è pensato per essere **elegante, sicuro e collaborativo**, con un�
     DB_USERNAME=root
     DB_PASSWORD=
 
-
 5. Genera la chiave dell’app:
     ```bash
     php artisan key:generate
