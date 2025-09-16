@@ -78,32 +78,33 @@ Password: admin123
     php artisan serve
     npm run dev
 
-Struttura del progetto
-app/
-├─ Http/
-│  ├─ Controllers/
-│  │  ├─ Auth/        # Login, Register, Reset password
-│  │  └─ AdminController.php
-│  └─ Middleware/
-│     └─ AdminMiddleware.php
-resources/
-├─ views/
-│  ├─ layout/
-│  │  ├─ app.blade.php
-│  │  ├─ navbar.blade.php
-│  │  └─ footer.blade.php
-│  ├─ auth/           # Login, Register, Forgot password, etc.
-│  ├─ admin/          # Dashboard admin
-│  └─ user/           # Dashboard famiglia
-├─ css/
-│  └─ app.css
-├─ js/
-│  └─ app.js
-routes/
-├─ web.php
-database/
-├─ migrations/
-├─ seeders/
+8. Struttura del progetto
+    ```bash
+    app/
+    ├─ Http/
+    │  ├─ Controllers/
+    │  │  ├─ Auth/        # Login, Register, Reset password
+    │  │  └─ AdminController.php
+    │  └─ Middleware/
+    │     └─ AdminMiddleware.php
+    resources/
+    ├─ views/
+    │  ├─ layout/
+    │  │  ├─ app.blade.php
+    │  │  ├─ navbar.blade.php
+    │  │  └─ footer.blade.php
+    │  ├─ auth/           # Login, Register, Forgot password, etc.
+    │  ├─ admin/          # Dashboard admin
+    │  └─ user/           # Dashboard famiglia
+    ├─ css/
+    │  └─ app.css
+    ├─ js/
+    │  └─ app.js
+    routes/
+    ├─ web.php
+    database/
+    ├─ migrations/
+    ├─ seeders/
 
 8. Utilizzo:
 
