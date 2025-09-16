@@ -107,7 +107,7 @@ Password: admin123
     ├─ seeders/
 
 8. Utilizzo:
-
+    ```bash
     Accedi come utente admin → /admin/dashboard
 
     Accedi come utente famiglia → registrati e ricevi un codice famiglia
@@ -122,10 +122,10 @@ Password: admin123
 
     Pulsanti e card armonizzate per leggibilità e UX
 
-    Licenza
+9. Licenza
 
     MIT License © 2025 Vito Strisciuglio
 
-    Contatti
+10. Contatti
 
     Per dubbi o contributi: vitostri89@gmail.com
