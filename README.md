@@ -1,62 +1,137 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# CoFi – Gestione Finanziaria Familiare
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+[![Laravel](https://img.shields.io/badge/Laravel-12-red)](https://laravel.com/)
+[![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-blue)](https://getbootstrap.com/)
+[![PHP](https://img.shields.io/badge/PHP-8.2-blueviolet)](https://www.php.net/)
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Descrizione
+**CoFi** è una web app per la gestione finanziaria familiare.  
+Permette a una famiglia di tracciare entrate, spese e budget, con la possibilità di aggiungere membri e gestire autorizzazioni.  
+Il progetto è pensato per essere **elegante, sicuro e collaborativo**, con un’interfaccia pulita e colori pastello.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+**Caratteristiche principali:**
+- Registrazione e login sicuri tramite email e password
+- Codice unico per ogni famiglia per gestire l’accesso dei membri
+- Ruoli: `admin` generale (gestisce solo utenti e statistiche globali) e membri della famiglia
+- Dashboard per controllare entrate, spese e membri
+- GDPR-compliant e protezione della privacy
+- Design responsive con Bootstrap 5
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## Tecnologie utilizzate
+- **Backend:** Laravel 12, PHP 8.2  
+- **Frontend:** Blade Templates + Bootstrap 5  
+- **Database:** MySQL  
+- **Autenticazione:** Laravel Breeze / Auth  
+- **Gestione pacchetti:** npm + Vite
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+---
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Installazione
+1. Clona il repository:
+   ```bash
+   git clone https://github.com/tuo-username/cofi.git
+   cd cofi
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-## Laravel Sponsors
+2. Installa le dipendenze PHP:
+```bash
+    composer install
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
 
-### Premium Partners
+3. Installa le dipendenze JS:
+```bash
+    npm install
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
 
-## Contributing
+Configura il file .env (database, email, chiavi segrete):
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=cofi
+DB_USERNAME=root
+DB_PASSWORD=
 
-## Code of Conduct
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Genera la chiave dell’app:
+```bash
+php artisan key:generate
 
-## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Esegui migrazioni e seed:
+```bash
+php artisan migrate --seed
 
-## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-# CoFi
+Il seed crea un utente admin predefinito:
+
+Email: admin@cofi.com
+
+Password: admin123
+
+Avvia il server di sviluppo:
+```bash
+php artisan serve
+npm run dev
+
+Struttura del progetto
+app/
+├─ Http/
+│  ├─ Controllers/
+│  │  ├─ Auth/        # Login, Register, Reset password
+│  │  └─ AdminController.php
+│  └─ Middleware/
+│     └─ AdminMiddleware.php
+resources/
+├─ views/
+│  ├─ layout/
+│  │  ├─ app.blade.php
+│  │  ├─ navbar.blade.php
+│  │  └─ footer.blade.php
+│  ├─ auth/           # Login, Register, Forgot password, etc.
+│  ├─ admin/          # Dashboard admin
+│  └─ user/           # Dashboard famiglia
+├─ css/
+│  └─ app.css
+├─ js/
+│  └─ app.js
+routes/
+├─ web.php
+database/
+├─ migrations/
+├─ seeders/
+
+Utilizzo
+
+Accedi come utente admin → /admin/dashboard
+
+Accedi come utente famiglia → registrati e ricevi un codice famiglia
+
+Aggiungi membri e traccia le spese dalla dashboard
+
+Stile e design
+
+Colori pastello eleganti, predominanza di blu pastello
+
+Layout centrato e responsive
+
+Pulsanti e card armonizzate per leggibilità e UX
+
+Licenza
+
+MIT License © 2025 Vito Strisciuglio
+
+Contatti
+
+Per dubbi o contributi: vitostri89@gmail.com
+
+
+---
+
+Se vuoi, Vito, posso anche prepararti **una versione “super elegante” del README** con **screenshot delle pagine, badge dinamici per GitHub Actions e istruzioni per contributori**, così il progetto sembra subito professionale.  
+
+Vuoi che faccia quella versione?
