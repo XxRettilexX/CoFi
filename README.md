@@ -38,33 +38,33 @@ Il progetto è pensato per essere **elegante, sicuro e collaborativo**, con un�
 
 
 2. Installa le dipendenze PHP:
-```bash
+    ```bash
     composer install
 
 
 3. Installa le dipendenze JS:
-```bash
+    ```bash
     npm install
 
 
-Configura il file .env (database, email, chiavi segrete):
+4. Configura il file .env (database, email, chiavi segrete):
 
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=cofi
-DB_USERNAME=root
-DB_PASSWORD=
-
-
-Genera la chiave dell’app:
-```bash
-php artisan key:generate
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=cofi
+    DB_USERNAME=root
+    DB_PASSWORD=
 
 
-Esegui migrazioni e seed:
-```bash
-php artisan migrate --seed
+5. Genera la chiave dell’app:
+    ```bash
+    php artisan key:generate
+
+
+6. Esegui migrazioni e seed:
+    ```bash
+    php artisan migrate --seed
 
 
 Il seed crea un utente admin predefinito:
@@ -73,10 +73,10 @@ Email: admin@cofi.com
 
 Password: admin123
 
-Avvia il server di sviluppo:
-```bash
-php artisan serve
-npm run dev
+7. Avvia il server di sviluppo:
+    ```bash
+    php artisan serve
+    npm run dev
 
 Struttura del progetto
 app/
@@ -105,33 +105,26 @@ database/
 ├─ migrations/
 ├─ seeders/
 
-Utilizzo
+8. Utilizzo:
 
-Accedi come utente admin → /admin/dashboard
+    Accedi come utente admin → /admin/dashboard
 
-Accedi come utente famiglia → registrati e ricevi un codice famiglia
+    Accedi come utente famiglia → registrati e ricevi un codice famiglia
 
-Aggiungi membri e traccia le spese dalla dashboard
+    Aggiungi membri e traccia le spese dalla dashboard
 
-Stile e design
+    Stile e design
 
-Colori pastello eleganti, predominanza di blu pastello
+    Colori pastello eleganti, predominanza di blu pastello
 
-Layout centrato e responsive
+    Layout centrato e responsive
 
-Pulsanti e card armonizzate per leggibilità e UX
+    Pulsanti e card armonizzate per leggibilità e UX
 
-Licenza
+    Licenza
 
-MIT License © 2025 Vito Strisciuglio
+    MIT License © 2025 Vito Strisciuglio
 
-Contatti
+    Contatti
 
-Per dubbi o contributi: vitostri89@gmail.com
-
-
----
-
-Se vuoi, Vito, posso anche prepararti **una versione “super elegante” del README** con **screenshot delle pagine, badge dinamici per GitHub Actions e istruzioni per contributori**, così il progetto sembra subito professionale.  
-
-Vuoi che faccia quella versione?
+    Per dubbi o contributi: vitostri89@gmail.com
