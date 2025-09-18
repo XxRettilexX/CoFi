@@ -99,9 +99,8 @@
     {{-- Navbar --}}
     @include('layout.navbar')
 
-    {{-- Contenuto principale --}}
-    <main class="container">
-        @yield('content')
+    <main>
+        {{ $slot }}
     </main>
 
     {{-- Footer --}}

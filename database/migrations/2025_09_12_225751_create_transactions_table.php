@@ -13,12 +13,11 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('family_id')->constrained()->onDelete('cascade');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->enum('type', ['entrata', 'uscita']);
-            $table->string('categoria');
-            $table->decimal('importo', 10, 2);
-            $table->date('data');
+            $table->foreignId('family_id')->constrained('families')->onDelete('cascade');
+            $table->string('description');
+            $table->enum('type', ['income', 'expense']); // entrata o uscita
+            $table->decimal('amount', 10, 2); // <- questa è la colonna mancante
+            $table->date('date');
             $table->timestamps();
         });
     }

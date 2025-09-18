@@ -6,24 +6,34 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FamilyController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+| Home pubblica
 |--------------------------------------------------------------------------
 */
 
-// ✅ Home pubblica
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-// ✅ Dashboard generica (differenziamo dopo per ruolo)
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+/*
+|--------------------------------------------------------------------------
+| Dashboard generica (differenziata per ruolo)
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'role:user'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+});
 
-// ✅ Rotte profilo (già pronte)
+
+
+/*
+|--------------------------------------------------------------------------
+| Profilo utente
+|--------------------------------------------------------------------------
+*/
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -37,8 +47,8 @@ Route::middleware('auth')->group(function () {
 */
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
-    Route::get('/utenti', [AdminController::class, 'listUsers'])->name('users');
-    Route::get('/famiglie', [AdminController::class, 'listFamilies'])->name('families');
+    Route::get('/users', [AdminController::class, 'listUsers'])->name('users');
+    Route::get('/families', [AdminController::class, 'listFamilies'])->name('families');
 });
 
 /*
@@ -49,17 +59,24 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 Route::middleware(['auth', 'role:user'])->prefix('user')->name('user.')->group(function () {
     Route::get('/dashboard', [UserController::class, 'index'])->name('dashboard');
 
-    // Gestione famiglia
+    // Famiglia
     Route::get('/family', [FamilyController::class, 'index'])->name('family.index');
     Route::post('/family/create', [FamilyController::class, 'store'])->name('family.store');
     Route::post('/family/join', [FamilyController::class, 'join'])->name('family.join');
 
-    // Gestione transazioni
+    // Transazioni
     Route::get('/transactions', [TransactionController::class, 'index'])->name('transactions.index');
     Route::get('/transactions/create', [TransactionController::class, 'create'])->name('transactions.create');
     Route::post('/transactions', [TransactionController::class, 'store'])->name('transactions.store');
     Route::delete('/transactions/{id}', [TransactionController::class, 'destroy'])->name('transactions.destroy');
 });
+
+/*
+|--------------------------------------------------------------------------
+| Creazione famiglia dalla dashboard
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth'])->post('/families', [FamilyController::class, 'store'])->name('families.store');
 
 /*
 |--------------------------------------------------------------------------
