@@ -15,13 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->rememberToken();
-            $table->foreignId('family_id')->nullable()->constrained()->onDelete('cascade');
-            $table->enum('role', ['admin_principale', 'membro'])->default('membro');
+            $table->foreignId('family_id')->nullable()->constrained('families')->onDelete('cascade');
+            $table->string('role')->default('user');
             $table->timestamps();
         });
+
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
