@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('role')->default('user');
             $table->string('password');
             $table->foreignId('family_id')->nullable()->constrained('families')->onDelete('cascade');
-            $table->string('role')->default('user');
             $table->timestamps();
         });
 

@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\FamilyController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\User\FamilyMemberController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,8 +27,6 @@ Route::get('/', function () {
 Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
-
-
 
 /*
 |--------------------------------------------------------------------------
@@ -59,10 +58,17 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 Route::middleware(['auth', 'role:user'])->prefix('user')->name('user.')->group(function () {
     Route::get('/dashboard', [UserController::class, 'index'])->name('dashboard');
 
-    // Famiglia
+    // Famiglia - Rotte aggiornate
     Route::get('/family', [FamilyController::class, 'index'])->name('family.index');
-    Route::post('/family/create', [FamilyController::class, 'store'])->name('family.store');
+    Route::get('/family/create', [FamilyController::class, 'create'])->name('family.create');
+    Route::post('/family', [FamilyController::class, 'store'])->name('family.store');
     Route::post('/family/join', [FamilyController::class, 'join'])->name('family.join');
+    Route::put('/family/{family}', [FamilyController::class, 'update'])->name('family.update');
+    Route::delete('/family/{family}/leave', [FamilyController::class, 'leave'])->name('family.leave');
+
+    // Gestione membri famiglia
+    Route::get('/family/{family}/members', [FamilyMemberController::class, 'index'])->name('family.members');
+    Route::delete('/family/{family}/members/{user}', [FamilyMemberController::class, 'removeMember'])->name('family.members.remove');
 
     // Transazioni
     Route::get('/transactions', [TransactionController::class, 'index'])->name('transactions.index');
@@ -73,10 +79,10 @@ Route::middleware(['auth', 'role:user'])->prefix('user')->name('user.')->group(f
 
 /*
 |--------------------------------------------------------------------------
-| Creazione famiglia dalla dashboard
+| Rotta per inviti via email (pubblica)
 |--------------------------------------------------------------------------
 */
-Route::middleware(['auth'])->post('/families', [FamilyController::class, 'store'])->name('families.store');
+Route::get('/family/invite/{token}', [FamilyController::class, 'acceptInvite'])->name('family.invite.accept');
 
 /*
 |--------------------------------------------------------------------------
